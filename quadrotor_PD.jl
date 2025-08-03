@@ -182,7 +182,6 @@ function controller!(environment, k)
     end
     if loop_bool == 1 && norm(position-waypoints[4]) > 0.3
         loop_ongoing = 1
-        #println("Jetzt muss er stoppen eigetnlich!!!!!!!!!!!!!!!!!!",step_counter)
     end
 
     x = tmp[1]
