@@ -9,6 +9,10 @@ For environment initialization, setup details, and further instructions, please 
 
 ## Navigation
 
+![Points](Video/Points.gif)
+
+![Navigation](./Video/Points.gif)
+
 ## Stabilization
 
 
