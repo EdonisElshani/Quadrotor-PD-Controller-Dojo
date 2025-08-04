@@ -17,6 +17,57 @@ The robustness of the PD controller is illustrated in the looping animation belo
 
 ![Looping](./Video/Looping.gif)
 
+## Control
+
+The quadrotor control system converts high-level commands (desired thrust, pitch, and roll) into individual motor speeds required for stable flight.
+
+- **Flying directions**:  
+  - Pitch corresponds to rotation around the **x-axis** (positive forward).  
+  - Roll corresponds to rotation around the **y-axis** (positive to the right).  
+
+- **Definitions**:  
+  - `thrust = v_z` (vertical velocity or lift command)  
+  - `pitch = axis · θ` (commanded pitch angle)  
+  - `roll = axis · φ` (commanded roll angle)
+
+These control inputs are processed by the controller to compute rotor speeds (in rpm) as follows:
+```
+motor1 = thrust − pitch + roll + yaw
+motor2 = thrust − pitch − roll + yaw
+motor3 = thrust + pitch − roll + yaw
+motor4 = thrust + pitch + roll − yaw
+```
+The diagram below visualizes the relationship between thrust, pitch, roll, and individual rotor forces:
+
+<img src="Illustration/quadrotor.png" alt="Quadrotor Control Diagram" width="800"/>
+
+## PD-Control Architecture
+
+The PD control system is organized in two main stages:
+
+1. **Position Controller (Outer Loop)**  
+   - Takes the desired position `des_{x,y,z}` and compares it with the current position.  
+   - Computes position error `e_pos` and outputs desired thrust and attitude angles (`des_{v_z}, θ, φ`).  
+
+2. **Thrust, Pitch, Roll Controller (Inner Loop)**  
+   - Takes the desired thrust and angles and compares them with the actual measured values.  
+   - Computes control signals for motor speeds using PD control with feedback on angular velocities and position.  
+
+The outputs of these controllers are combined into **rotor speed commands** which drive the drone’s motors.
+
+<img src="Illustration/PD.png" alt="Quadrotor Control Diagram" width="900"/>
+
+## Results
+
+### Position desired [1 1 1]
+
+<img src="Illustration/PD_Plot.png" alt="Quadrotor Control Diagram" width="400"/>
+
+### Error measurement desired Point [1 1 1]
+
+<img src="Illustration/PD_Error.png" alt="Quadrotor Control Diagram" width="400"/>
+
+
 ## References
 
 [1] Howell, T., Le Cleac’h, S., Bruedigam, J., Kolter, Z., Schwager, M., & Manchester, Z. (2022).  
