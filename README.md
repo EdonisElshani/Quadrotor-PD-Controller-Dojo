@@ -8,13 +8,14 @@ This project uses [**Dojo.jl**](https://dojo-sim.github.io/Dojo.jl/dev/), a diff
 For environment initialization, setup details, and further instructions, please refer to the official [Dojo documentation](https://dojo-sim.github.io/Dojo.jl/dev/)
 
 ## Navigation
-
-![Points](Video/Points.gif)
+The following video demonstrates the PD controller driving the quadrotor toward a desired point in the Dojo simulation environment, maintaining stability throughout the maneuver.
 
 ![Navigation](./Video/Points.gif)
 
 ## Stabilization
+The robustness of the PD controller is illustrated in the looping animation below. The quadrotor is disturbed from its equilibrium point but, returning to the desired point and maintaining stability despite looping manoeuvre.
 
+![Looping](./Video/Looping.gif)
 
 ## References
 
